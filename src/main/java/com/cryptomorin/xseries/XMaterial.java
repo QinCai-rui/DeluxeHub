@@ -2564,10 +2564,22 @@ public enum XMaterial implements XBase<XMaterial, Material> {
                 VERSION = 21;
             } else {
                 String version = Bukkit.getVersion();
-                Matcher matcher = Pattern.compile("MC: \\d+\\.(\\d+)").matcher(version);
+                // Captures both major and minor version numbers. Handles both legacy "1.XX" and
+                // the new Minecraft versioning format introduced after 1.21.11 (e.g. "26.1.2").
+                Matcher matcher = Pattern.compile("MC: (\\d+)\\.(\\d+)").matcher(version);
 
-                if (matcher.find()) VERSION = Integer.parseInt(matcher.group(1));
-                else throw new IllegalArgumentException("Failed to parse server version from: " + version);
+                if (matcher.find()) {
+                    int majorVersion = Integer.parseInt(matcher.group(1));
+                    int minorVersion = Integer.parseInt(matcher.group(2));
+                    if (majorVersion == 1) {
+                        // Traditional versioning: "1.XX.YY" – use the minor version.
+                        VERSION = minorVersion;
+                    } else {
+                        // New versioning format (e.g. "26.1.2" which follows 1.21.11).
+                        // Map to a value beyond 21 so all supports() checks for known versions pass.
+                        VERSION = 21 + minorVersion;
+                    }
+                } else throw new IllegalArgumentException("Failed to parse server version from: " + version);
             }
         }
 
