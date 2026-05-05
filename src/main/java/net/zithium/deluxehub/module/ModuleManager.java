@@ -1,6 +1,5 @@
 package net.zithium.deluxehub.module;
 
-import com.cryptomorin.xseries.reflection.XReflection;
 import net.zithium.deluxehub.DeluxeHubPlugin;
 import net.zithium.deluxehub.config.ConfigType;
 import net.zithium.deluxehub.module.modules.chat.AntiSwear;
@@ -71,10 +70,8 @@ public class ModuleManager {
         registerModule(new PlayerVanish(plugin));
         registerModule(new HologramManager(plugin));
 
-        // Requires 1.9+
-        if (XReflection.supports(9)) {
-            registerModule(new PlayerOffHandSwap(plugin), "world_settings.disable_off_hand_swap");
-        }
+        // Requires 1.9+ (always true since plugin requires api-version: 1.19)
+        registerModule(new PlayerOffHandSwap(plugin), "world_settings.disable_off_hand_swap");
 
         for (Module module : modules.values()) {
             try {
