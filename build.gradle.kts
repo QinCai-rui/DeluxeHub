@@ -20,12 +20,12 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.cryptomorin:XSeries:13.0.0")
+    implementation("com.github.cryptomorin:XSeries:13.6.0")
     implementation("javax.inject:javax.inject:1")
     implementation("javax.annotation:javax.annotation-api:1.2")
     implementation("com.github.BGMP.CommandFramework:command-framework-bukkit:master")
     implementation("com.tcoded:FoliaLib:0.5.1")
-    implementation("de.tr7zw:item-nbt-api:2.15.5") // UPDATE THIS FOR EACH NEW MC VERSION
+    implementation("de.tr7zw:item-nbt-api:2.15.7") // UPDATE THIS FOR EACH NEW MC VERSION
     implementation("org.bstats:bstats-bukkit-lite:1.7")
     implementation("com.github.shynixn.headdatabase:hdb-api:1.0")
     implementation("com.github.ItzSave:ZithiumLibrary:1f5182b77f")
